@@ -4,6 +4,8 @@ Student number: **101564373**. Required repository name: `101564373_COMP3123_Ass
 
 Repository: https://github.com/kamranomars-sudo/101564373_COMP3123_Assignment1
 
+Hosted API: https://101564373-comp-3123-assignment1.vercel.app — health check: https://101564373-comp-3123-assignment1.vercel.app/health
+
 A REST backend built with Node.js, Express 5, MongoDB, Mongoose, bcryptjs, JWT, Zod, Helmet and express-rate-limit. Users register and log in, then manage only the employees they created.
 
 ## Setup
@@ -71,7 +73,9 @@ Atlas connectivity was verified successfully; see `evidence/ATLAS-CONNECTION.md`
 
 ## Vercel hosting
 
-The root `index.js` exports the Express application for Vercel and reuses its MongoDB connection between requests. Local development still uses `npm start`. Import the GitHub repository into Vercel with the Express framework preset. Set `MONGODB_URI`, `JWT_SECRET` and `JWT_EXPIRES_IN` in Vercel environment variables; never commit them. Authorize the deployment's outbound network addresses in Atlas before verifying the deployed `/health` endpoint. A production deployment URL has not yet been verified.
+The root `index.js` exports the Express application for Vercel and reuses its MongoDB connection between requests. Local development still uses `npm start`. Import the GitHub repository into Vercel with the Express framework preset. Set `MONGODB_URI` and `JWT_SECRET` as sensitive Vercel environment variables; `JWT_EXPIRES_IN` defaults to `1h`. Never commit secrets. This deployment was verified on October 12, 2026: `/health` returned HTTP 200 with `database: connected`, and live login, employee CRUD and ownership checks passed. See `evidence/VERCEL-DEPLOYMENT.md`.
+
+The assignment Atlas project allows `0.0.0.0/0`, explicitly approved for Vercel's dynamic outbound IP addresses. Database authentication remains required; the application's database user is limited to the assignment database. A deployment with fixed outbound IPs should use a narrower access list.
 
 Vercel's filesystem is temporary: hosted logs are written to `/tmp/comp3123-logs/application.log` and the Vercel console. Local logs remain in `logs/application.log`. In-memory rate limits apply per server instance; distributed deployments require shared storage for globally consistent limits. `.vercelignore` keeps evidence, local environment files and test files out of the deployment bundle.
 
