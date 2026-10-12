@@ -68,3 +68,11 @@ Postman uses non-sensitive sample credentials `userA` / `userB` with `TestPass12
 Before submission, run the Postman collection against your configured database and capture genuine screenshots of MongoDB collections/hashed passwords/owner references, signup, login, CRUD, validation, cross-user rejection in both directions, rate limit, Helmet headers, health and local logs. Add those screenshots to `evidence/`. Do not expose your `.env`, database credentials or full production tokens. See `evidence/CHECKLIST.md`.
 
 Atlas connectivity was verified successfully; see `evidence/ATLAS-CONNECTION.md`. Recorded Postman and MongoDB screenshots are in `evidence/comp3123_assignment1_screenshots.pdf`. Submit the repository link plus a project ZIP excluding `node_modules`, `.env`, `.git` and generated logs. Review the implementation so you can explain it during evaluation.
+
+## Vercel hosting
+
+The root `index.js` exports the Express application for Vercel and reuses its MongoDB connection between requests. Local development still uses `npm start`. Import the GitHub repository into Vercel with the Express framework preset. Set `MONGODB_URI`, `JWT_SECRET` and `JWT_EXPIRES_IN` in Vercel environment variables; never commit them. Authorize the deployment's outbound network addresses in Atlas before verifying the deployed `/health` endpoint. A production deployment URL has not yet been verified.
+
+Vercel's filesystem is temporary: hosted logs are written to `/tmp/comp3123-logs/application.log` and the Vercel console. Local logs remain in `logs/application.log`. In-memory rate limits apply per server instance; distributed deployments require shared storage for globally consistent limits. `.vercelignore` keeps evidence, local environment files and test files out of the deployment bundle.
+
+The D2L instructions additionally require screenshots in DOCX format. Use `evidence/101564373_Postman_Evidence.docx` after reviewing its layout in Word. Submit the ZIP, screenshot DOCX, GitHub link and verified Vercel API URL.

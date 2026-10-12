@@ -1,0 +1,7 @@
+.env
+.git
+evidence
+logs
+test
+*.zip
+scripts

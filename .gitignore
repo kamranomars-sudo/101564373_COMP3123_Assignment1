@@ -6,3 +6,5 @@ coverage/
 *.zip
 evidence/atlas-*.jpg
 evidence/pdf-review.png
+.vercel/
+tmp/

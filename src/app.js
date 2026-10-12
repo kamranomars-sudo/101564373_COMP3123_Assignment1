@@ -7,6 +7,7 @@ import { log } from './utils/logger.js';
 export function createApp({ secret, expiresIn = '1h', authLimit = 20, apiLimit = 200 }) {
   if (!secret || secret.length < 32) throw new Error('JWT_SECRET must contain at least 32 characters');
   const app = express(); app.disable('x-powered-by'); app.use(helmet());
+  if (process.env.VERCEL) app.set('trust proxy', 1);
   app.use((req, res, next) => {
     res.on('finish', () => log('request', { method: req.method, path: req.path, status: res.statusCode })); next();
   });
