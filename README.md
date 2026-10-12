@@ -2,6 +2,8 @@
 
 Student number: **101564373**. Required repository name: `101564373_COMP3123_Assignment1`.
 
+Repository: https://github.com/kamranomars-sudo/101564373_COMP3123_Assignment1
+
 A REST backend built with Node.js, Express 5, MongoDB, Mongoose, bcryptjs, JWT, Zod, Helmet and express-rate-limit. Users register and log in, then manage only the employees they created.
 
 ## Setup
@@ -65,4 +67,4 @@ Postman uses non-sensitive sample credentials `userA` / `userB` with `TestPass12
 
 Before submission, run the Postman collection against your configured database and capture genuine screenshots of MongoDB collections/hashed passwords/owner references, signup, login, CRUD, validation, cross-user rejection in both directions, rate limit, Helmet headers, health and local logs. Add those screenshots to `evidence/`. Do not expose your `.env`, database credentials or full production tokens. See `evidence/CHECKLIST.md`.
 
-Create the public repository named above, commit development progress honestly, and submit its link plus a project ZIP excluding `node_modules`, `.env`, `.git` and generated logs. A repository URL, Atlas verification and screenshots remain user/environment-dependent until configured. Review the implementation so you can explain it during evaluation.
+Atlas connectivity was verified successfully; see `evidence/ATLAS-CONNECTION.md`. Recorded Postman and MongoDB screenshots are in `evidence/comp3123_assignment1_screenshots.pdf`. Submit the repository link plus a project ZIP excluding `node_modules`, `.env`, `.git` and generated logs. Review the implementation so you can explain it during evaluation.
