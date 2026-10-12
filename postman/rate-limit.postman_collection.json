@@ -1,0 +1,63 @@
+{
+  "info": {
+    "name": "Assignment 1 — Rate Limit (run 21 iterations)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Run once against a fresh test database. Signup returns 409 on subsequent runs. Capture screenshots before deletions. Test rate limiting separately after the main collection."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "invalidToken",
+      "value": "invalid-token"
+    },
+    {
+      "key": "tokenA",
+      "value": ""
+    },
+    {
+      "key": "tokenB",
+      "value": ""
+    },
+    {
+      "key": "eidA",
+      "value": ""
+    },
+    {
+      "key": "eidB",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Repeated invalid login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/user/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Rejected or rate limited', () => pm.expect([400,429]).to.include(pm.response.code));",
+              "if (pm.response.code === 429) pm.test('Retry-After present', () => pm.expect(pm.response.headers.has('Retry-After')).to.be.true);"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
